@@ -21,4 +21,4 @@ centralize reusable practices for a development teams working with OpenShift.
 When logging into the OpenShift 4 web console, you will find the Developer Catalog
 on the left hand side of your screen under the `Catalog` tab:
 
-[./assets/DeveloperCatalogTab.png]
+[Developer Catalog Tab](./assets/DeveloperCatalogTab.png)

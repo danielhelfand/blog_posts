@@ -1,3 +1,5 @@
+# Using the OpenShift Developer Catalog to Promote Reuse Across Organizations
+
 No matter what role I have had or where I have worked, one thing that has stuck
 with me is the idea that project teams within a company are working on different
 problems but approaching these challenges with similar methods and tools. Since

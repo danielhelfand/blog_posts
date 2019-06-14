@@ -1,4 +1,4 @@
-# Using the OpenShift Developer Catalog to Promote Reuse Across Organizations
+# Sharing Infrastructure Patterns Across an Organization's Development Teams
 
 No matter what role I have had or where I have worked, one thing that has stuck
 with me is the idea that project teams within a company are working on different
@@ -20,7 +20,17 @@ In working with OpenShift, I have found the OpenShift Developer Catalog helps ad
 some of the concerns I raised above. The OpenShift Developer Catalog is a way to
 centralize reusable practices for a development teams working with OpenShift.
 
-When logging into the OpenShift 4 web console, you will find the Developer Catalog
+When logging into the OpenShift 4 web console, you will find the `Developer Catalog`
 on the left hand side of your screen under the `Catalog` tab:
 
 ![Developer Catalog Tab](./assets/DeveloperCatalogTab.png)
+
+Once in the `Developer Catalog`, you are presented with simple options for deploying
+application components to OpenShift using various programming languages. The catalog
+also allows for the encapsulation of database deployments and other services to help
+support application components.
+
+One of the great uses cases of the `Developer Catalog` is to encapsulate infrastructure
+patterns through `builder images`, which are basically container images that support
+a particular programming language or framework to host application component source
+code. 

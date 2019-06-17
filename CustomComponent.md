@@ -22,10 +22,12 @@ for OpenShift, to try and deploy a Java component as part of an application. `od
 uses the Developer Catalog to deploy local source to OpenShift and start up that source
 on a container with a couple of CLI commands.
 
-This unfortunately didn't work because the Minishift Developer Catalog doesn't come
+This unfortunately didn't work because the `Minishift` Developer Catalog doesn't come
 with a Java option. So I started learning about how to add a custom `builder image`
 in the event the Developer Catalog doesn't support a particular language or framework.
 
 The method I used to add a Java builder image with `Red Hat Open JDK 8` to the
-Developer Catalog was to use an `image stream` to define what image definition I
-would use to support my Java component. 
+Developer Catalog was to use an `image stream` to define what image I would use
+to support my Java component. An `image stream` can be defined in YAML or JSON to
+define properties of the `builder image`, including where to pull the image definition
+from and descriptions that will display in the Developer Catalog web console.

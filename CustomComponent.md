@@ -19,15 +19,16 @@ to support an infrastructure pattern that is not preloaded in the catalog.
 Recently, I was working with `Minishift`, which is a local tool for running OpenShift
 3.11 and below locally. I was using OpenShift Do (`odo`), the developer-focused CLI
 for OpenShift, to try and deploy a Java component as part of an application. `odo`
-uses the Developer Catalog to deploy local source to OpenShift and start up that source
-on a container with a couple of CLI commands.
+uses the Developer Catalog to deploy local source code to OpenShift and start up
+that source code on a container that will support the local language used with a
+couple of CLI commands.
 
 This unfortunately didn't work because the `Minishift` Developer Catalog doesn't come
 with a Java option. So I started learning about how to add a custom `builder image`
 in the event the Developer Catalog doesn't support a particular language or framework.
 
 The method I used to add a Java builder image with `Red Hat Open JDK 8` to the
-Developer Catalog was to use an `image stream` to define what image I would use
+Developer Catalog was an `image stream` to define what image I would use
 to support my Java component. An `image stream` can be defined in YAML or JSON to
 define properties of the `builder image`, including where to pull the image definition
 from and descriptions that will display in the Developer Catalog web console.

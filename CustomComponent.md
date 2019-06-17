@@ -1,36 +1,31 @@
-# Sharing Infrastructure Patterns Across an Organization's Development Teams
+# Adding a Custom Builder Image to an OpenShift Service Catalog
 
-No matter what role I have had or where I have worked, one thing that has stuck
-with me is the idea that project teams within a company are working on different
-problems but approaching these challenges with similar methods and tools. Since
-teams are using similar approaches, these teams will very often face similar
-challenges regardless of what they are working towards.
+One of the things that I have enjoyed using most about OpenShift is a feature
+that I think is commonly overlooked: the Developer Catalog. The Developer Catalog
+is a centralized location where a development team working with OpenShift can
+encapsulate and share how application components and services are deployed to an
+OpenShift project.
 
-The true challenge comes in how to easily share ideas and practices across a large
-company. Additionally, helping teams be conscious that, despite different business
-requirements, other development teams within their company typically use very similar
-development practices and frameworks that should allow for standards to be created
-and easily shared across projects can be difficult.
+A very common use case of the Developer Catalog is to define an infrastructure
+pattern commonly referred to as a `builder image`. A `builder image` is a container
+image used to support a particular language or framework.
 
-It's frustrating in an environment like that knowing that someone or a team within
-your company knows how to do what you are struggling with, but feeling like you
-can't easily find who to talk to and how to ultimately solve your project's issues.
+The OpenShift Developer Catalog comes preloaded with `builder images` that can
+support `Node.js`, `Ruby`, `Python`, `Red Hat Open JDK 8`, and more. And while the
+Developer Catalog has many easy ways to get started deploying a number of supported
+languages, the catalog is also flexible in allowing you to add your own `builder images`
+to support an infrastructure pattern that is not preloaded in the catalog.
 
-In working with OpenShift, I have found the OpenShift Developer Catalog helps address
-some of the concerns I raised above. The OpenShift Developer Catalog is a way to
-centralize reusable practices for a development teams working with OpenShift.
+Recently, I was working with `Minishift`, which is a local tool for running OpenShift
+3.11 and below locally. I was using OpenShift Do (`odo`), the developer-focused CLI
+for OpenShift, to try and deploy a Java component as part of an application. `odo`
+uses the Developer Catalog to deploy local source to OpenShift and start up that source
+on a container with a couple of CLI commands.
 
-When logging into the OpenShift 4 web console, you will find the `Developer Catalog`
-on the left hand side of your screen under the `Catalog` tab:
+This unfortunately didn't work because the Minishift Developer Catalog doesn't come
+with a Java option. So I started learning about how to add a custom `builder image`
+in the event the Developer Catalog doesn't support a particular language or framework.
 
-![Developer Catalog Tab](./assets/DeveloperCatalogTab.png)
-
-Once in the `Developer Catalog`, you are presented with simple options for deploying
-application components to OpenShift using various programming languages. The catalog
-also allows for the encapsulation of database deployments and other services to help
-support application components.
-
-One of the great uses cases of the `Developer Catalog` is to encapsulate infrastructure
-patterns through `builder images`, which are basically container images that support
-a particular programming language or framework to host application component source
-code. 
+The method I used to add a Java builder image with `Red Hat Open JDK 8` to the
+Developer Catalog was to use an `image stream` to define what image definition I
+would use to support my Java component. 

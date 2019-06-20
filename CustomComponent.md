@@ -1,4 +1,4 @@
-# Adding a Custom Builder Image to an OpenShift Service Catalog
+# Adding a Custom Builder Image to an OpenShift Service Catalog via an Image Stream
 
 One of the things that I have enjoyed using most about OpenShift is a feature
 that I think is commonly overlooked: the Developer Catalog. The Developer Catalog
@@ -61,7 +61,7 @@ the user adding the `builder image`.
 
 So we have seen how to add a Java option to the Developer Catalog, but how can these
 `builder images` be utilized to deploy an application component? Using `odo`, we can easily
-leverage `builder images` available in the Developer catalog. To see what option are
+leverage `builder images` available in the Developer catalog. To see what options are
 available, `odo` features a command to list components available in the catalog:
 
 ```
@@ -92,6 +92,8 @@ I am now presented with a `golang` component in my Developer Catalog that I can
 use to deploy a `golang` application using `odo`:
 
 ```
+$ odo catalog list components
+
 NAME              PROJECT       TAGS
 dotnet            openshift     1.0,1.1,2.1,2.2,latest
 golang            openshift     1.10.2,latest
@@ -106,9 +108,9 @@ python            openshift     2.7,3.5,3.6,latest
 ruby              openshift     2.3,2.4,2.5,latest
 ```
 
-Using the OpenShift golang example shown [here](https://github.com/sclorg/golang-ex),
+Using the OpenShift `golang` example shown [here](https://github.com/sclorg/golang-ex),
 I can run the following to create a project in my OpenShift cluster, create a
-golang component that will use the `golang` component created via an `image stream`,
+`golang` component that will use the `golang` `builder` `image` created via an `image stream`,
 expose the component via a url, and then deploy the component and have it running on
 OpenShift:
 
@@ -120,8 +122,13 @@ odo push
 ```
 
 When the deployment is complete, the `golang` component can be accessed via the url
-created with the following:
+created by `odo`. Clicking on the URL should show the following greeting message:
 
 ```
 Hello OpenShift!
 ```
+
+With `image streams`, promoting reuse of infrastructure patterns makes it easier
+for development teams to focus on applications rather than how they are hosted. `odo`
+further extends their capabilities by providing a CLI that makes it simple to pick
+and choose what infrastructure to utilize when developing applications on OpenShift.

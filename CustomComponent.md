@@ -11,7 +11,7 @@ pattern commonly referred to as a `builder image`. A `builder image` is a contai
 image used to support a particular language or framework.
 
 The OpenShift Developer Catalog comes preloaded with `builder images` that can
-support applications wrriten in `Node.js`, `Ruby`, `Python`, `Red Hat Open JDK 8`,
+support applications written in `Node.js`, `Ruby`, `Python`, `Red Hat Open JDK 8`,
 and more. And while the Developer Catalog has many easy ways to get started
 deploying a number of supported languages, the catalog is also flexible in allowing
 you to add your own `builder images` to support an infrastructure pattern that is

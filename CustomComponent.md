@@ -1,4 +1,4 @@
-# Adding a Custom Builder Image to an OpenShift Service Catalog via an Image Stream
+# Adding a Custom Builder Image to an OpenShift Service Catalog via an Imagestream
 
 One of the things that I have enjoyed using most about OpenShift is a feature
 that I think is commonly overlooked: the Developer Catalog. The Developer Catalog
@@ -11,27 +11,30 @@ pattern commonly referred to as a `builder image`. A `builder image` is a contai
 image used to support a particular language or framework.
 
 The OpenShift Developer Catalog comes preloaded with `builder images` that can
-support `Node.js`, `Ruby`, `Python`, `Red Hat Open JDK 8`, and more. And while the
-Developer Catalog has many easy ways to get started deploying a number of supported
-languages, the catalog is also flexible in allowing you to add your own `builder images`
-to support an infrastructure pattern that is not preloaded in the catalog.
+support applications wrriten in `Node.js`, `Ruby`, `Python`, `Red Hat Open JDK 8`,
+and more. And while the Developer Catalog has many easy ways to get started
+deploying a number of supported languages, the catalog is also flexible in allowing
+you to add your own `builder images` to support an infrastructure pattern that is
+not preloaded in the catalog.
 
 Recently, I was working with `Minishift`, which is a tool for running OpenShift
 3.11 and below locally. I was using OpenShift Do (`odo`), the developer-focused CLI
 for OpenShift, to try and deploy a Java component as part of an application. `odo`
-uses the Developer Catalog to deploy local source code to OpenShift and start up
-that source code on a container that will support the local language used with a
-couple of CLI commands.
+uses `builder images` defined in the Developer Catalog to deploy local source
+code to OpenShift and start up that source code on a container that will support
+the local language used. This can all be done with a couple of CLI commands.
 
-This unfortunately didn't work because the `Minishift` Developer Catalog doesn't come
-with a Java option. So I started learning about how to add a custom `builder image`
-in the event the Developer Catalog doesn't support a particular language or framework.
+Adding the Java component with `Minishift` unfortunately didn't work because the
+`Minishift` Developer Catalog doesn't come with a Java option. So I started
+learning about how to add a custom `builder image` in the event the Developer
+Catalog doesn't support a particular language or framework.
 
-The method I used to add a Java builder image with `Red Hat Open JDK 8` to the
-Developer Catalog was an `image stream` to define what image I would use
-to support my Java component. An `image stream` can be defined in YAML or JSON to
+The method I used to add a Java `builder image` with `Red Hat Open JDK 8` to the
+Developer Catalog was an `imagestream` to define what image I would use
+to support my Java component. An `imagestream` can be defined in YAML or JSON to
 define properties of the `builder image`, including where to pull the image definition
-from and descriptions that will display in the Developer Catalog web console.
+from and descriptions of the image that will display in the Developer Catalog
+web console.
 
 The `image stream` I used to add Java to the `Minishift` catalog can be found
 [here](https://gist.github.com/danielhelfand/ad53ceb06cd7619790a1700a95e3c93a).
@@ -41,28 +44,29 @@ shown [here](https://gist.github.com/danielhelfand/ad53ceb06cd7619790a1700a95e3c
 We can also define a display name that will be available in the catalog UI through
 the web console as shown [here](https://gist.github.com/danielhelfand/ad53ceb06cd7619790a1700a95e3c93a#file-red-hat-openjdk-8-imagestream-L9).
 
-The `tags` property of the `image stream` definition is used to define different versions
+The `tags` property of the `imagestream` definition is used to define different versions
 of a `builder image` that are supported (e.g., using OpenJDK 8-1.5 or 8-1.6). Using the
 `from` property, we can define what image to use and where to pull the image from. In
 the [java example](https://gist.github.com/danielhelfand/ad53ceb06cd7619790a1700a95e3c93a#file-red-hat-openjdk-8-imagestream-L28),
 the image is pulled from the Red Hat Container Registry and is a `Docker` image.
 
-The final step in adding the Java `builder image` is to login to your OpenShift cluster
-using `oc login` and run the following:
+The final step in adding the Java `builder image` is to login to your OpenShift
+cluster using `oc login` and then run the following:
 
 ```
 curl -kL https://gist.github.com/danielhelfand/ad53ceb06cd7619790a1700a95e3c93a/raw 2> /dev/null | oc apply -n openshift --as system:admin -f -
 ```
 
 With the command above, a Java option has been added under the openshift namespace
-and will now be available. The above command can be used to add `Red Hat OpenJDK8`
-to `Minishift` or any OpenShift cluster assuming proper permissions are available to
-the user adding the `builder image`.
+and will now be available to support Java applications. The above command can be
+used to add `Red Hat OpenJDK8` to `Minishift` or any OpenShift cluster assuming
+proper permissions are available to the user adding the `builder image`.
 
 So we have seen how to add a Java option to the Developer Catalog, but how can these
-`builder images` be utilized to deploy an application component? Using `odo`, we can easily
-leverage `builder images` available in the Developer catalog. To see what options are
-available, `odo` features a command to list components available in the catalog:
+`builder images` be utilized to deploy an application component? Using `odo`, we
+can easily leverage `builder images` available in the Developer catalog. To see
+what options are available, `odo` features a command to list components available
+in the catalog:
 
 ```
 $ odo catalog list components
@@ -81,8 +85,9 @@ ruby              openshift     2.3,2.4,2.5,latest
 ```
 
 In OpenShift 4, the Developer Catalog features a Java component as shown above. To
-show the simplicity of adding components to catalog, I am going to add a `golang`
-component to the Developer catalog using the command below:
+show the simplicity of adding components to the catalog, I am going to add a `golang`
+component via an [imagestream](https://gist.github.com/danielhelfand/6b63ba3f250ea596a077904d43abaf62)
+to the Developer Catalog using the command below:
 
 ```
 curl -kL https://gist.github.com/danielhelfand/6b63ba3f250ea596a077904d43abaf62/raw 2> /dev/null | oc apply -n openshift --as system:admin -f -
@@ -110,11 +115,16 @@ ruby              openshift     2.3,2.4,2.5,latest
 
 Using the OpenShift `golang` example shown [here](https://github.com/sclorg/golang-ex),
 I can run the following to create a project in my OpenShift cluster, create a
-`golang` component that will use the `golang` `builder` `image` created via an `image stream`,
+`golang` component that will use the `golang` `builder` `image` created via an `imagestream`,
 expose the component via a url, and then deploy the component and have it running on
 OpenShift:
 
 ```
+# Clone the golang example application and go into its root directory
+git clone https://github.com/sclorg/golang-ex
+cd golang-ex
+
+# Create the configuration for the golang example application to be deployed to OpeShift using odo and deploy it to OpenShift
 odo project create goproject
 odo create golang golang-ex --port 8080
 odo url create golang-ex --port 8080
@@ -128,7 +138,12 @@ created by `odo`. Clicking on the URL should show the following greeting message
 Hello OpenShift!
 ```
 
-With `image streams`, promoting reuse of infrastructure patterns makes it easier
+With `imagestreams`, promoting reuse of infrastructure patterns makes it easier
 for development teams to focus on applications rather than how they are hosted. `odo`
 further extends their capabilities by providing a CLI that makes it simple to pick
 and choose what infrastructure to utilize when developing applications on OpenShift.
+
+More information on image streams can be found in the [OpenShift documentation](https://docs.openshift.com/container-platform/4.1/openshift_images/images-understand.html#images-imagestream-use_images-understand). Official Red Hat imagestreams
+can be found on the [openshift/library](https://github.com/openshift/library/tree/master/community)
+GitHub as well as under the [Software Collections](https://github.com/sclorg)
+GitHub organization. 

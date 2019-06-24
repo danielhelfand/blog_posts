@@ -145,5 +145,5 @@ and choose what infrastructure to utilize when developing applications on OpenSh
 
 More information on image streams can be found in the [OpenShift documentation](https://docs.openshift.com/container-platform/4.1/openshift_images/images-understand.html#images-imagestream-use_images-understand). Official Red Hat imagestreams
 can be found on the [openshift/library](https://github.com/openshift/library/tree/master/community)
-GitHub as well as under the [Software Collections](https://github.com/sclorg)
-GitHub organization. 
+GitHub repository as well as under the [Software Collections](https://github.com/sclorg)
+GitHub organization.

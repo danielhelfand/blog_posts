@@ -147,3 +147,6 @@ More information on image streams can be found in the [OpenShift documentation](
 can be found on the [openshift/library](https://github.com/openshift/library/tree/master/community)
 GitHub repository as well as under the [Software Collections](https://github.com/sclorg)
 GitHub organization.
+
+For information on `odo`, you can visit the [OpenShift Do](https://openshiftdo.org/)
+website and also check out the project's [GitHub repository](https://github.com/openshift/odo).

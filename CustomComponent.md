@@ -20,7 +20,7 @@ Using the from property, we can specify what image to use and where to pull the 
 
 The final step in adding the Golang builder image is to log in to your Red Hat OpenShift cluster using oc login and then run the following:
 
-```bash
+```
 curl -kL https://gist.github.com/danielhelfand/6b63ba3f250ea596a077904d43abaf62/raw 2> /dev/null | oc apply -n openshift --as system:admin -f -
 ```
 
@@ -28,7 +28,7 @@ With the command above, a Golang option has been added under the OpenShift names
 
 Using [OpenShift Do (odo)](https://developers.redhat.com/blog/2019/05/03/announcing-odo-developer-focused-cli-for-red-hat-openshift/), the developer-focused CLI for OpenShift, we can easily leverage builder images available in the Developer Catalog. To see what options are available, odo features a command to list builder images (i.e., components) available in the catalog:
 
-```bash
+```
 $ odo catalog list components
 
 NAME               PROJECT      TAGS
@@ -47,7 +47,7 @@ ruby               openshift    2.3,2.4,2.5,latest
 
 Using the OpenShift Golang example shown [here](https://github.com/sclorg/golang-ex), I can run the following to create a project in my OpenShift cluster, create a Golang component that will use the Golang builder image created via an imagestream, expose the component via a URL, and then deploy the component and have it running on OpenShift:
 
-```bash
+```
 # Clone the golang example application and go into its root directory
 $ git clone https://github.com/sclorg/golang-ex
 $ cd golang-ex

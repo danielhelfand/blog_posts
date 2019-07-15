@@ -16,7 +16,7 @@ I used the imagestream found [here](https://gist.github.com/danielhelfand/6b63ba
 
 The main [tags property](https://gist.github.com/danielhelfand/6b63ba3f250ea596a077904d43abaf62#file-centos7-go-1-10-2-imagestream-L11) of the imagestream definition can be used to define different versions of a builder image that are supported. Additionally, each version defined within the tags property can have its own tags where it can be specified the image is a builder image by including a [builder tag](https://gist.github.com/danielhelfand/6b63ba3f250ea596a077904d43abaf62#file-centos7-go-1-10-2-imagestream-L21).
 
-Using the from property, we can specify what image to use and where to pull the image from. In the Golang example, the image is pulled from DockerHub and is a Docker image.
+Using the from property, we can specify what image to use and where to pull the image from. In the [Golang example](https://gist.github.com/danielhelfand/6b63ba3f250ea596a077904d43abaf62#file-centos7-go-1-10-2-imagestream-L44), the image is pulled from DockerHub and is a Docker image.
 
 The final step in adding the Golang builder image is to log in to your Red Hat OpenShift cluster using oc login and then run the following:
 
